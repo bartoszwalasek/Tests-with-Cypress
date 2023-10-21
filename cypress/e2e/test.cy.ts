@@ -9,6 +9,10 @@ describe("template spec", () => {
     cy.get('[name="password"]').type("test_pass_wsb");
     cy.get('[title="Login"]').click();
     cy.url().should("include", "account/account");
+    cy.get('.block_6 > .nav > .dropdown > .dropdown-toggle > .caret').click()
+    cy.contains("€ Euro").click();
+    cy.url().should("include", "currency=EUR");
     cy.get(".sidewidt").find('[href*="account/logout"]').click();
+    cy.get('.maintext').should("contain.text", " Account Logout")
   });
 });

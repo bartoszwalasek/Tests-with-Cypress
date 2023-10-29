@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "chrome-dev": "npx cypress run --browser=chrome --headed --config baseUrl=https://automationteststore.com/",
+    "chrome-stage": "npx cypress run --browser=chrome --headed --config baseUrl=https://automationteststore.com/",
+    "firefox-dev": "npx cypress run --browser=firefox --config baseUrl=https://automationteststore.com/",
+    "chrome": "npx cypress run --browser=chrome"
   },
   "repository": {
     "type": "git",

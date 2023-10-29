@@ -5,6 +5,10 @@ export default defineConfig({
     baseUrl: "https://automationteststore.com/",
     viewportWidth: 1280,
     viewportHeight: 720,
+    env:{
+      dev: "https://automationteststore.com/",
+      stage: "https://google.com"
+    },
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },

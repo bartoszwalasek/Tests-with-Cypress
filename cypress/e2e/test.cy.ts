@@ -1,41 +1,47 @@
+import { login, general, userAccount, mainPage } from "../support/selectors";
+import testUser from "../fixtures/testUser.json";
+
 describe("template spec", () => {
   beforeEach("Login to the App", () => {
-    cy.visit("/");
-    cy.title().should("eq", "A place to practice your automation skills!");
+    cy.openUrlAndCheckTitle("/", "A place to practice your automation skills!");
     cy.findByTextAndClick("Login or register");
-    cy.findTypeAndCheckValue(
-      '[name="loginname"]',
-      "test_user_wsb",
-      "test_user_wsb"
-    );
-    cy.clearInputAndType('[name="password"]', "test_pass_wsb")
-    cy.findSelectorAndClick('[title="Login"]');
-    cy.assertUrl("include", "account/account");
+    cy.findTypeAndCheckValue(login.inputLogin, testUser.login, testUser.login);
+    cy.get(login.inputPassword, { timeout: 20000 }).type("test_pass_wsb", {
+      log: false,
+    });
+    // cy.clearInputAndType(login.inputPassword, "test_pass_wsb")
+    cy.findSelectorAndClick(login.buttonLogin);
+    cy.assertUrl("account/account");
   });
 
   it("passes", () => {
-    cy.get(".dropdown-toggle").contains(" US Dollar").click();
-    cy.contains("€ Euro").click();
-    cy.assertUrl("include", "currency=EUR");
-    cy.findSelectorAndClick(
-      '[href="https://automationteststore.com/index.php?rt=product/category&path=58"]'
+    cy.findSelectorTextAndClick(mainPage.dropdownCurrency, " US Dollar");
+    cy.findByTextAndClick("€ Euro");
+    cy.assertUrl("currency=EUR");
+    cy.findSelectorAndClick(mainPage.tabMen);
+    cy.findSelectorTextAndClick(mainPage.optionTabSkinCare, "Skincare");
+    cy.findSelectorTextAndClick(
+      general.contentPanel,
+      "Men+Care Clean Comfort Deodorant"
     );
-    cy.get("ul.thumbnails").contains("Skincare").click();
-    cy.get(".contentpanel")
-      .contains("Men+Care Clean Comfort Deodorant")
-      .click();
-    cy.clearInputAndType("#product_quantity", "1");
-    cy.findSelectorAndClick(".cart")
-    cy.assertUrl("include", "checkout/cart");
-    cy.get(".product-list").should(
-      "contain.text",
+    cy.clearInputAndType(general.productQy, "1");
+    cy.findSelectorAndClick(general.cart);
+    cy.assertUrl("checkout/cart");
+    cy.findElementAndCheckText(
+      general.productList,
       "Men+Care Clean Comfort Deodorant"
     );
   });
 
   afterEach("Logout from the App", () => {
-    cy.get("#customernav").click();
-    cy.get(".sidewidt").find('[href*="account/logout"]').click();
-    cy.get(".maintext").should("contain.text", " Account Logout");
+    cy.findSelectorAndClick(mainPage.navigationBarCustomer);
+    cy.getSelectorFindSelectorAndClick(
+      userAccount.myAccountContainer,
+      '[href*="account/logout"]'
+    );
+    cy.findElementAndCheckText(
+      userAccount.headerAccountLogout,
+      " Account Logout"
+    );
   });
 });

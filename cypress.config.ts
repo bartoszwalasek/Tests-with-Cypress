@@ -5,6 +5,8 @@ export default defineConfig({
     baseUrl: "https://automationteststore.com/",
     viewportWidth: 1280,
     viewportHeight: 720,
+    defaultCommandTimeout: 10000,
+    requestTimeout: 10000,
     env:{
       dev: "https://automationteststore.com/",
       stage: "https://google.com"

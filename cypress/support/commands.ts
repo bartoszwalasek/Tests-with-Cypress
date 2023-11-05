@@ -10,6 +10,7 @@ declare global {
       findByTextAndClick(text: string): Chainable<void>;
       findSelectorAndClick(selector: string): Chainable<void>;
       clearInputAndType(selector: string, value: string): Chainable<void>;
+      assertUrl(assert: string, value: string): Chainable<void>;
     }
   }
 }
@@ -28,4 +29,8 @@ Cypress.Commands.add("findSelectorAndClick", (selector) => {
 
 Cypress.Commands.add("clearInputAndType", (selector, value) => {
   cy.get(selector).clear().type(value);
+});
+
+Cypress.Commands.add("assertUrl", (assert, value) => {
+  cy.url().should(assert, value);
 });

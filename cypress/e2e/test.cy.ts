@@ -1,17 +1,11 @@
 import { login, general, userAccount, mainPage } from "../support/selectors";
 import testUser from "../fixtures/testUser.json";
+import { generalObject } from "../support/pageObjects/generalOjects";
+import { loginPage } from "../support/pageObjects/loginPage";
 
 describe("template spec", () => {
   beforeEach("Login to the App", () => {
-    cy.openUrlAndCheckTitle("/", "A place to practice your automation skills!");
-    cy.findByTextAndClick("Login or register");
-    cy.findTypeAndCheckValue(login.inputLogin, testUser.login, testUser.login);
-    cy.get(login.inputPassword, { timeout: 20000 }).type("test_pass_wsb", {
-      log: false,
-    });
-    // cy.clearInputAndType(login.inputPassword, "test_pass_wsb")
-    cy.findSelectorAndClick(login.buttonLogin);
-    cy.assertUrl("account/account");
+    generalObject.loginToTheApp(testUser.login, testUser.password);
   });
 
   it("passes", () => {
@@ -33,15 +27,15 @@ describe("template spec", () => {
     );
   });
 
-  afterEach("Logout from the App", () => {
-    cy.findSelectorAndClick(mainPage.navigationBarCustomer);
-    cy.getSelectorFindSelectorAndClick(
-      userAccount.myAccountContainer,
-      '[href*="account/logout"]'
-    );
-    cy.findElementAndCheckText(
-      userAccount.headerAccountLogout,
-      " Account Logout"
-    );
-  });
+  // afterEach("Logout from the App", () => {
+  //   cy.findSelectorAndClick(mainPage.navigationBarCustomer);
+  //   cy.getSelectorFindSelectorAndClick(
+  //     userAccount.myAccountContainer,
+  //     '[href*="account/logout"]'
+  //   );
+  //   cy.findElementAndCheckText(
+  //     userAccount.headerAccountLogout,
+  //     " Account Logout"
+  //   );
+  // });
 });

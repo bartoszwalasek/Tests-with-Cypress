@@ -1,3 +1,6 @@
+import { loginPage } from "./pageObjects/loginPage";
+import { login } from "../support/selectors";
+
 export {};
 declare global {
   namespace Cypress {
@@ -14,7 +17,12 @@ declare global {
       openUrlAndCheckTitle(page: string, title: string): Chainable<void>;
       findSelectorTextAndClick(selector: string, text: string): Chainable<void>;
       findElementAndCheckText(selector: string, text: string): Chainable<void>;
-      getSelectorFindSelectorAndClick(selector: string, find: string);
+      getSelectorFindSelectorAndClick(
+        selector: string,
+        find: string
+      ): Chainable<void>;
+      loginBySession(username: string, password: string): Chainable<void>;
+      login: typeof login;
     }
   }
 }
@@ -55,3 +63,33 @@ Cypress.Commands.add("findElementAndCheckText", (selector, text) => {
 Cypress.Commands.add("getSelectorFindSelectorAndClick", (selector, find) => {
   cy.get(selector).find(find).click();
 });
+
+Cypress.Commands.add("loginBySession", (username, password) => {
+  cy.session(
+    [username, password],
+    () => {
+      cy.visit("/index.php?rt=account/login");
+      loginPage.fillLoginInputsAndClickLogin(username, password);
+    },
+    {
+      cacheAcrossSpecs: true,
+    }
+  );
+});
+
+// const login = (username: string, password: string) => {
+//   cy.session(
+//     username,
+//     () => {
+//       cy.visit("/index.php?rt=account/login");
+//       cy.get('[name="loginname"]').type(username);
+//       cy.get('[name="password"]').type(password);
+//       cy.get('')
+//     },
+//     {
+//       cacheAcrossSpecs: true,
+//     }
+//   );
+// };
+
+// Cypress.Commands.addAll({ login });

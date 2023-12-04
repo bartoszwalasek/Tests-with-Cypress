@@ -1,4 +1,3 @@
-import { login } from "./selectors";
 export {};
 declare global {
   namespace Cypress {
@@ -17,6 +16,6 @@ Cypress.Commands.add("fillLoginInputsAndClickLogin", (username, password) => {
 });
 
 Cypress.Commands.add("fillLoginInputsAndClickLogin", (username, password) => {
-          cy.get("selector").type(username);
-          cy.get("selector").type(password);
-        });
+  cy.get("selector").type(username);
+  cy.get("selector").type(password);
+});

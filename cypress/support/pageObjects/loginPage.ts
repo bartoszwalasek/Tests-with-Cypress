@@ -8,6 +8,7 @@ export class Login {
   fillLoginInputsAndClickLogin(username: string, password: string) {
     cy.get(login.inputLogin).type(username);
     cy.get(login.inputPassword).type(password);
+    cy.get(login.buttonLogin).click();
   }
 }
 

@@ -1,19 +1,17 @@
-let a: string;
-
 it("invoke text", () => {
   cy.visit("https://automationteststore.com");
   cy.get(".welcome_msg")
     .invoke("text")
-    .then(($txt) => {
-      a = $txt;
-      cy.log(a);
+    .then((txt) => {
+      Cypress.env("W", txt);
+      cy.log(Cypress.env("W"));
     });
 });
 
 it("aa", () => {
-  cy.log(a);
+  cy.log(Cypress.env("W"));
 });
 
 it("aa2", () => {
-  cy.log(a);
+  cy.log(Cypress.env("W"));
 });

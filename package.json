@@ -8,7 +8,8 @@
     "chrome-dev": "npx cypress run --browser=chrome --headed --config baseUrl=https://automationteststore.com/",
     "chrome-stage": "npx cypress run --browser=chrome --headed --config baseUrl=https://automationteststore.com/",
     "firefox-dev": "npx cypress run --browser=firefox --config baseUrl=https://automationteststore.com/",
-    "chrome": "npx cypress run --browser=chrome"
+    "chrome": "npx cypress run --browser=chrome",
+    "2specs": "npx cypress run --browser=chrome --headed --spec cypress/e2e/newTest.cy.ts,cypress/e2e/newTest2.cy.ts"
   },
   "repository": {
     "type": "git",

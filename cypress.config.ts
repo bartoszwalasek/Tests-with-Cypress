@@ -9,7 +9,7 @@ export default defineConfig({
     embeddedScreenshots: true,
     inlineAssets: true,
     saveAllAttempts: false,
-    // videoOnFailOnly: true,
+    videoOnFailOnly: true,
   },
   e2e: {
     experimentalRunAllSpecs: true,
@@ -19,8 +19,7 @@ export default defineConfig({
     defaultCommandTimeout: 10000,
     requestTimeout: 10000,
     env: {
-      dev: "https://automationteststore.com/",
-      stage: "https://google.com",
+      dev: "https://demoqa.com/BookStore/v1/",
     },
     setupNodeEvents(on, config) {
       require("cypress-mochawesome-reporter/plugin")(on);

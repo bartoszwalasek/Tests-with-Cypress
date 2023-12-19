@@ -9,7 +9,8 @@
     "chrome-stage": "npx cypress run --browser=chrome --headed --config baseUrl=https://automationteststore.com/",
     "firefox-dev": "npx cypress run --browser=firefox --config baseUrl=https://automationteststore.com/",
     "chrome": "npx cypress run --browser=chrome",
-    "2specs": "npx cypress run --browser=chrome --headed --spec cypress/e2e/newTest.cy.ts,cypress/e2e/newTest2.cy.ts"
+    "2specs": "npx cypress run --browser=chrome --headed --spec cypress/e2e/newTest.cy.ts,cypress/e2e/newTest2.cy.ts",
+    "apiTests": "npx cypress run --browser=chrome --spec cypress/e2e/api.cy.ts --env API=https://demoqa.com/BookStore/v1/"
   },
   "repository": {
     "type": "git",
